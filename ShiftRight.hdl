@@ -1,0 +1,8 @@
+CHIP ShiftRight{
+     IN in[16];
+     OUT out[16];
+     
+     PARTS:
+     //shift right the digits and don't touch the MSB
+     And16(a=true, b[0..14]=in[1..15], b[15]=in[15], out=out);
+}

@@ -1,0 +1,11 @@
+CHIP Mul{
+    IN a[16], b[16];
+    OUT out[16];
+
+    PARTS:
+
+    Mul16By8(a = a, b = b[0..7], aShiftBy8 = aShiftBy8, out = part0);
+    Mul16By8(a = aShiftBy8, b = b[8..15], aShiftBy8 = aShiftBy16, out = part1);
+
+    Add16(a = part0, b = part1, out = out);
+}
