@@ -1,0 +1,20 @@
+/**
+* this chip get 16-bit bus (in) and single bit (n), and compute 16-bit output:
+* if n == 0 output = in
+* if n == 1 output = -in
+*/
+
+CHIP Negate {
+    IN
+        in[16], n;
+
+    OUT
+        out[16];
+
+    PARTS:
+
+    Not16( in = in, out = notIn);
+    Inc16( in = notIn, out = negIN);
+    Mux16( a = in, b = negIN, sel = n, out = out);
+
+}
