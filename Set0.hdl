@@ -1,0 +1,20 @@
+/**
+* this chip get 16-bit bus (in) and single bit (zin), and compute 16-bit output:
+* if zin == 1 output = 0
+* if zin == 0 output = in
+*/
+
+
+
+CHIP Set0 {
+    IN
+        in[16],
+        zin; // zero the input?
+
+    OUT
+        out[16];
+
+    PARTS:
+
+    Mux16( a = in, b = false, sel = zin, out = out);
+}

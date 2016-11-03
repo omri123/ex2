@@ -42,5 +42,21 @@ CHIP ALU {
         ng; // 1 if (out < 0),  0 otherwise
 
     PARTS:
-   // Put you code here:
+
+    Set0(in = x, zin = zx, out = xAfterZGate);
+    SetNot(in = xAfterZGate, n = nx, out = xAfterZeroNotGate);
+
+    Set0(in = y, zin = zy, out = yAfterZGate);
+    SetNot(in = yAfterZGate, n  = ny, out = yAfterZeroNotGate);
+
+
+    Add16(a = xAfterZeroNotGate, b = yAfterZeroNotGate, out = sum);
+    And16(a = xAfterZeroNotGate, b = yAfterZeroNotGate, out = andRes);
+
+    Mux16(a = andRes, b = sum, sel = f, out = output);
+    SetNot( in = output, n = no, out = notOutput);
+    Mux16(a = output, b = notOutput, sel = no, out = out);
+
+    Xor( a = true, b = out, out = zr);
+    Xor( a = false, b = out[15], out = ng);
 }
