@@ -13,5 +13,6 @@ CHIP Inc16 {
     OUT out[16];
 
     PARTS:
+    // the input is a=in[16] and b= LSB is 1 while the other digit are zeros
     Add16(a=in, b[1..15]=false, b[0]=true,out=out);
 }
